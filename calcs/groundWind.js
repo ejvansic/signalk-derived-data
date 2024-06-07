@@ -3,7 +3,7 @@ module.exports = function (app, plugin) {
     {
       group: 'wind',
       optionKey: 'groundWind',
-      title: 'Ground Wind Angle and Speed',
+      title: 'Ground Wind Angle and Speed (based on SOG, AWA and AWS)',
       derivedFrom: [
         'navigation.speedOverGround',
         'environment.wind.speedApparent',
@@ -30,7 +30,8 @@ module.exports = function (app, plugin) {
     {
       group: 'wind',
       optionKey: 'groundWindDirection',
-      title: 'DEPRECATED env.wind.directionGround',
+      title:
+        'DEPRECATED env.wind.directionGround (based on headingTrue and GWA)',
       derivedFrom: [
         'navigation.headingTrue',
         'environment.wind.angleTrueGround'
@@ -49,7 +50,8 @@ module.exports = function (app, plugin) {
     {
       group: 'wind',
       optionKey: 'groundWindDirection2',
-      title: 'Ground Wind Direction',
+      title:
+        'Ground Wind Direction (based on headingTrue and GWA, env.wind.directionTrue)',
       derivedFrom: [
         'navigation.headingTrue',
         'environment.wind.angleTrueGround'
@@ -65,3 +67,4 @@ module.exports = function (app, plugin) {
     }
   ]
 }
+

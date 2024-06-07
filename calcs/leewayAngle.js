@@ -3,13 +3,18 @@ module.exports = function (app, plugin) {
   return {
     group: 'heading',
     optionKey: 'leewayAngle',
-    title: 'Leeway',
+    title: 'Leeway (based on heading and COG)',
     derivedFrom: [
-      'navigation.headingMagnetic',
-      'navigation.courseOverGroundTrue'
+      'navigation.headingTrue',
+      'navigation.courseOverGroundTrue',
+      'navigation.speedOverGround'
     ],
-    calculator: function (hdg, cog) {
-      var leewayAngle = Math.abs(hdg - cog)
+    calculator: function (hdg, cog, sog) {
+      var leewayAngle = 0.0
+      if (sog > 0.5) {
+        leewayAngle = Math.abs(hdg - cog)
+        if (leewayAngle > Math.PI) leewayAngle = Math.Abs(Math.PI*2 - leewayAngle)
+      }
       // app.debug("leeway angle: " + leewayAngle);
       return [{ path: 'navigation.leewayAngle', value: leewayAngle }]
     }
